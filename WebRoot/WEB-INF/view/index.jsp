@@ -25,11 +25,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="header">
   <div class="block-center">
     <div class="top-b clearfix">
-      <div class="logo"><a href="${pageContext.request.contextPath}/path/index"><img src="img/logo.png"></a></div>
+      <div class="logo"><a href="index.jsp"><img src="img/logo.png"></a></div>
       <div class="nav">
         <ul>
           <li><a class="active" href="${pageContext.request.contextPath}/path/index">首页</a></li>
-          <li><a href="${pageContext.request.contextPath}/path/service">检测服务</a></li>
+          <li><a href="${pageContext.request.contextPath}/goodsController/findAllGoods">检测服务</a></li>
           <li><a href="${pageContext.request.contextPath}/path/user_order">订单管理</a></li>
           <li><a class="search" href="${pageContext.request.contextPath}/path/search">搜索</a></li>
           <li><a class="gwc" href="${pageContext.request.contextPath}/path/user_cart">购物车</a></li>

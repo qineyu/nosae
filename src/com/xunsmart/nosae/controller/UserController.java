@@ -48,7 +48,10 @@ public class UserController {
 	@RequestMapping("changePassWord")
 	public String changePassWord(HttpSession session,String oldpwd,String newpwd){
 		User user = (User) session.getAttribute(UserTAG);
-		
+		if (EmptyUtils.isEmpty(user)) {
+			System.out.println("用户身份过期,需重新登录");
+			return "login";
+		}
 		if (!user.getUserPass().equals(oldpwd)) {
 			return "error";
 		}else{

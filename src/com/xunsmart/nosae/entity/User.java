@@ -12,6 +12,8 @@ public class User implements Serializable {
     private String userNickName;
 
     private String userPhone;
+    
+    private String userDesc;
 
     private String userSex;
 
@@ -115,14 +117,11 @@ public class User implements Serializable {
         this.wechatHeadimg = wechatHeadimg;
     }
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName
-				+ ", userPass=" + userPass + ", userNickName=" + userNickName
-				+ ", userPhone=" + userPhone + ", userSex=" + userSex
-				+ ", uesrEmail=" + uesrEmail + ", userHeadimg=" + userHeadimg
-				+ ", wechatOpenId=" + wechatOpenId + ", wechatName="
-				+ wechatName + ", wechatHeadimg=" + wechatHeadimg + "]";
+	public String getUserDesc() {
+		return userDesc;
 	}
-    
+
+	public void setUserDesc(String userDesc) {
+		this.userDesc = userDesc;
+	}
 }
