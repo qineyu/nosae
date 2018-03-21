@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunsmart.nosae.mapper.OrderMapper">
+  <resultMap id="OrderResultMap" type="com.xunsmart.nosae.entity.Order">
+    <id column="order_Id" jdbcType="VARCHAR" property="orderId" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="order_price" jdbcType="VARCHAR" property="orderPrice" />
+    <result column="order_user_Id" jdbcType="INTEGER" property="orderUserId" />
+    <result column="order_goods_Id" jdbcType="INTEGER" property="orderGoodsId" />
+    <result column="order_state" jdbcType="VARCHAR" property="orderState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_Id, order_number, order_price, order_user_Id, order_goods_Id, order_state
+  </sql>
+  <select id="findOrderById" parameterType="java.lang.String" resultMap="OrderResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where order_number = #{number,jdbcType=VARCHAR}
+  </select>
+  <select id="findAllOrder" parameterType="java.lang.String" resultMap="OrderResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+  </select>
+  <delete id="delOrderById" parameterType="java.lang.String">
+    delete from order
+     where order_number = #{number,jdbcType=VARCHAR}
+    <!-- where order_Id = #{orderId,jdbcType=VARCHAR} -->
+  </delete>
+  <insert id="addOrder" parameterType="com.xunsmart.nosae.entity.Order">
+    insert into order (order_Id, order_number, order_price, 
+      order_user_Id, order_goods_Id, order_state
+      )
+    values (#{orderId,jdbcType=VARCHAR}, #{orderNumber,jdbcType=VARCHAR}, #{orderPrice,jdbcType=VARCHAR}, 
+      #{orderUserId,jdbcType=INTEGER}, #{orderGoodsId,jdbcType=INTEGER}, #{orderState,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="addOrderBySelective" parameterType="com.xunsmart.nosae.entity.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_Id,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="orderPrice != null">
+        order_price,
+      </if>
+      <if test="orderUserId != null">
+        order_user_Id,
+      </if>
+      <if test="orderGoodsId != null">
+        order_goods_Id,
+      </if>
+      <if test="orderState != null">
+        order_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null">
+        #{orderPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="orderUserId != null">
+        #{orderUserId,jdbcType=INTEGER},
+      </if>
+      <if test="orderGoodsId != null">
+        #{orderGoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null">
+        #{orderState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateBySelective" parameterType="com.xunsmart.nosae.entity.Order">
+    update order
+    <set>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null">
+        order_price = #{orderPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="orderUserId != null">
+        order_user_Id = #{orderUserId,jdbcType=INTEGER},
+      </if>
+      <if test="orderGoodsId != null">
+        order_goods_Id = #{orderGoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null">
+        order_state = #{orderState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateById" parameterType="com.xunsmart.nosae.entity.Order">
+    update order
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      order_price = #{orderPrice,jdbcType=VARCHAR},
+      order_user_Id = #{orderUserId,jdbcType=INTEGER},
+      order_goods_Id = #{orderGoodsId,jdbcType=INTEGER},
+      order_state = #{orderState,jdbcType=VARCHAR}
+   where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

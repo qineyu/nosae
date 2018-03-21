@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunsmart.nosae.mapper.GoodsMapper" >
+  <resultMap id="GoodsResultMap" type="com.xunsmart.nosae.entity.Goods" >
+    <id column="goods_Id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_Name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_Desc" property="goodsDesc" jdbcType="VARCHAR" />
+    <result column="goods_url" property="goodsUrl" jdbcType="VARCHAR" />
+    <result column="goods_img" property="goodsImg" jdbcType="VARCHAR" />
+    <result column="goods_price" property="goodsPrice" jdbcType="VARCHAR" />
+    <result column="goods_type" property="goodsType.typeId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_Id, goods_Name, goods_Desc, goods_url, goods_img, goods_price,goods_type
+  </sql>
+  <!-- 根据id查找 -->
+  <select id="findGoodsById" resultMap="GoodsResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where goods_Id = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <!-- 查询所有 -->
+  <select id="findAllGoods" resultMap="GoodsResultMap" parameterType="java.lang.Integer">
+    select 
+     <include refid="Base_Column_List" />
+    from goods
+  </select>
+<!--根据id删除  -->
+  <delete id="delGoodsById" parameterType="java.lang.Integer" >
+    delete from goods
+    where goods_Id = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  <!--增加  -->
+  <insert id="addGoods" parameterType="com.xunsmart.nosae.entity.Goods" >
+    insert into goods (goods_Id, goods_Name, goods_Desc, 
+      goods_url, goods_img, goods_price
+      )
+    values (#{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsDesc,jdbcType=VARCHAR}, 
+      #{goodsUrl,jdbcType=VARCHAR}, #{goodsImg,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=VARCHAR}
+      )
+  </insert>
+  <!-- 有条件增加  -->
+  <insert id="addGoodsBySelective" parameterType="com.xunsmart.nosae.entity.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        goods_Id,
+      </if>
+      <if test="goodsName != null" >
+        goods_Name,
+      </if>
+      <if test="goodsDesc != null" >
+        goods_Desc,
+      </if>
+      <if test="goodsUrl != null" >
+        goods_url,
+      </if>
+      <if test="goodsImg != null" >
+        goods_img,
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price,
+      </if>
+      <if test="goodsType != null" >
+        goods_Type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDesc != null" >
+        #{goodsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsUrl != null" >
+        #{goodsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImg != null" >
+        #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null" >
+        #{goodsPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+         #{goodsType.typeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <!-- 有条件更新 -->
+  <update id="updateBySelective" parameterType="com.xunsmart.nosae.entity.Goods" >
+    update goods
+    <set >
+      <if test="goodsName != null" >
+        goods_Name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDesc != null" >
+        goods_Desc = #{goodsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsUrl != null" >
+        goods_url = #{goodsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImg != null" >
+        goods_img = #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null" >
+        goods_price = #{goodsPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+         goods_Type = #{goodsType.typeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where goods_Id = #{goodsId,jdbcType=INTEGER}
+  </update>
+ <!-- 更新 -->
+  <update id="updateById" parameterType="com.xunsmart.nosae.entity.Goods" >
+    update goods
+    set goods_Name = #{goodsName,jdbcType=VARCHAR},
+      goods_Desc = #{goodsDesc,jdbcType=VARCHAR},
+      goods_url = #{goodsUrl,jdbcType=VARCHAR},
+      goods_img = #{goodsImg,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=VARCHAR}
+    where goods_Id = #{goodsId,jdbcType=INTEGER}
+  </update>
+</mapper>

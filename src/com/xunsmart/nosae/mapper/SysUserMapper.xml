@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunsmart.nosae.mapper.SysUserMapper" >
+  <resultMap id="UserResultMap" type="com.xunsmart.nosae.entity.SysUser" >
+    <id column="userId" property="userid" jdbcType="BIGINT" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="column" property="column" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIGINT" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="lastLoginDate" property="lastlogindate" jdbcType="TIMESTAMP" />
+    <result column="count" property="count" jdbcType="BIGINT" />
+    <result column="wechat_open_Id" property="wechatOpenId" jdbcType="VARCHAR" />
+    <result column="wechat_Name" property="wechatName" jdbcType="VARCHAR" />
+    <result column="wechat_headimg" property="wechatHeadimg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userId, userName, password, nickName, createDate, telephone, email, column, status, 
+    last_login_time, lastLoginDate, count, wechat_open_Id, wechat_Name, wechat_headimg
+  </sql>
+  <select id="findSysUserById" resultMap="UserResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where userId = #{userId,jdbcType=BIGINT}
+  </select>
+  
+   <select id="findAllSysUser" resultMap="UserResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+  </select>
+  
+  <delete id="delSysUserById" parameterType="java.lang.Long" >
+    delete from sys_user
+    where userId = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="addSysUser" parameterType="com.xunsmart.nosae.entity.SysUser" >
+    insert into sys_user (userId, userName, password, 
+      nickName, createDate, telephone, 
+      email, column, status, 
+      last_login_time, lastLoginDate, count, 
+      wechat_open_Id, wechat_Name, wechat_headimg
+      )
+    values (#{userid,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{telephone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{column,jdbcType=VARCHAR}, #{status,jdbcType=BIGINT}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{lastlogindate,jdbcType=TIMESTAMP}, #{count,jdbcType=BIGINT}, 
+      #{wechatOpenId,jdbcType=VARCHAR}, #{wechatName,jdbcType=VARCHAR}, #{wechatHeadimg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="addSysUserBySelective" parameterType="com.xunsmart.nosae.entity.SysUser" >
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="nickname != null" >
+        nickName,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="column != null" >
+        column,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+      <if test="lastlogindate != null" >
+        lastLoginDate,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="wechatOpenId != null" >
+        wechat_open_Id,
+      </if>
+      <if test="wechatName != null" >
+        wechat_Name,
+      </if>
+      <if test="wechatHeadimg != null" >
+        wechat_headimg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="column != null" >
+        #{column,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIGINT},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogindate != null" >
+        #{lastlogindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=BIGINT},
+      </if>
+      <if test="wechatOpenId != null" >
+        #{wechatOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatName != null" >
+        #{wechatName,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatHeadimg != null" >
+        #{wechatHeadimg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateBySelective" parameterType="com.xunsmart.nosae.entity.SysUser" >
+    update sys_user
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickName = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="column != null" >
+        column = #{column,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIGINT},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogindate != null" >
+        lastLoginDate = #{lastlogindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=BIGINT},
+      </if>
+      <if test="wechatOpenId != null" >
+        wechat_open_Id = #{wechatOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatName != null" >
+        wechat_Name = #{wechatName,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatHeadimg != null" >
+        wechat_headimg = #{wechatHeadimg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="com.xunsmart.nosae.entity.SysUser" >
+    update sys_user
+    set userName = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      nickName = #{nickname,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      column = #{column,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIGINT},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      lastLoginDate = #{lastlogindate,jdbcType=TIMESTAMP},
+      count = #{count,jdbcType=BIGINT},
+      wechat_open_Id = #{wechatOpenId,jdbcType=VARCHAR},
+      wechat_Name = #{wechatName,jdbcType=VARCHAR},
+      wechat_headimg = #{wechatHeadimg,jdbcType=VARCHAR}
+    where userId = #{userid,jdbcType=BIGINT}
+  </update>
+</mapper>

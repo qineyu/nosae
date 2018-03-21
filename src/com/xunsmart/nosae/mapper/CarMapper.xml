@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunsmart.nosae.mapper.CarMapper" >
+  <resultMap id="CarResultMap" type="com.xunsmart.nosae.entity.Car" >
+    <id column="car_id" property="carId" jdbcType="INTEGER" />
+    <result column="car_goods_Id" property="carGoodsId" jdbcType="INTEGER" />
+    <result column="car_user_Id" property="carUserId" jdbcType="INTEGER" />
+    <result column="car_goods_Num" property="carGoodsNum" jdbcType="INTEGER" />
+    <result column="car_price" property="carPrice" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    car_id, car_goods_Id, car_user_Id, car_goods_Num, car_price
+  </sql>
+  
+  <!-- 根据id查找 -->
+  <select id="findCarById" resultMap="CarResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car
+    where car_id = #{carId,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 查找所有 -->
+  <select id="findAllCar" resultMap="CarResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car
+  </select>
+ 
+ <!-- 根据id删除购物车 -->
+  <delete id="delCarById" parameterType="java.lang.Integer" >
+    delete from car
+    where car_id = #{carId,jdbcType=INTEGER}
+  </delete>
+ 
+ <!-- 增加 -->
+  <insert id="addCar" parameterType="com.xunsmart.nosae.entity.Car" >
+    insert into car (car_id, car_goods_Id, car_user_Id, 
+      car_goods_Num, car_price)
+    values (#{carId,jdbcType=INTEGER}, #{carGoodsId,jdbcType=INTEGER}, #{carUserId,jdbcType=INTEGER}, 
+      #{carGoodsNum,jdbcType=INTEGER}, #{carPrice,jdbcType=VARCHAR})
+  </insert>
+ 
+ <!-- 有条件增加 -->
+  <insert id="addCarBySelective" parameterType="com.xunsmart.nosae.entity.Car" >
+    insert into car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="carGoodsId != null" >
+        car_goods_Id,
+      </if>
+      <if test="carUserId != null" >
+        car_user_Id,
+      </if>
+      <if test="carGoodsNum != null" >
+        car_goods_Num,
+      </if>
+      <if test="carPrice != null" >
+        car_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="carGoodsId != null" >
+        #{carGoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="carUserId != null" >
+        #{carUserId,jdbcType=INTEGER},
+      </if>
+      <if test="carGoodsNum != null" >
+        #{carGoodsNum,jdbcType=INTEGER},
+      </if>
+      <if test="carPrice != null" >
+        #{carPrice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+ 
+ <!-- 有条件更新 -->
+  <update id="updateBySelective" parameterType="com.xunsmart.nosae.entity.Car" >
+    update car
+    <set >
+      <if test="carGoodsId != null" >
+        car_goods_Id = #{carGoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="carUserId != null" >
+        car_user_Id = #{carUserId,jdbcType=INTEGER},
+      </if>
+      <if test="carGoodsNum != null" >
+        car_goods_Num = #{carGoodsNum,jdbcType=INTEGER},
+      </if>
+      <if test="carPrice != null" >
+        car_price = #{carPrice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where car_id = #{carId,jdbcType=INTEGER}
+  </update>
+ 
+ <!-- 更新 -->
+  <update id="updateById" parameterType="com.xunsmart.nosae.entity.Car" >
+    update car
+    set car_goods_Id = #{carGoodsId,jdbcType=INTEGER},
+      car_user_Id = #{carUserId,jdbcType=INTEGER},
+      car_goods_Num = #{carGoodsNum,jdbcType=INTEGER},
+      car_price = #{carPrice,jdbcType=VARCHAR}
+    where car_id = #{carId,jdbcType=INTEGER}
+  </update>
+</mapper>

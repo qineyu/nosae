@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunsmart.nosae.mapper.ProjectadminMapper" >
+  <resultMap id="BaseResultMap" type="com.xunsmart.nosae.entity.Projectadmin" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="uploadPeople" property="uploadpeople" jdbcType="VARCHAR" />
+    <result column="AuditingPeople" property="auditingpeople" jdbcType="VARCHAR" />
+    <result column="sampleNum" property="samplenum" jdbcType="VARCHAR" />
+    <result column="CustomerUnit" property="customerunit" jdbcType="VARCHAR" />
+    <result column="ExpirationTips" property="expirationtips" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, date, uploadPeople, AuditingPeople, sampleNum, CustomerUnit, ExpirationTips
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from projectadmin
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from projectadmin
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xunsmart.nosae.entity.Projectadmin" >
+    insert into projectadmin (id, name, date, uploadPeople, 
+      AuditingPeople, sampleNum, CustomerUnit, 
+      ExpirationTips)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, #{uploadpeople,jdbcType=VARCHAR}, 
+      #{auditingpeople,jdbcType=VARCHAR}, #{samplenum,jdbcType=VARCHAR}, #{customerunit,jdbcType=VARCHAR}, 
+      #{expirationtips,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunsmart.nosae.entity.Projectadmin" >
+    insert into projectadmin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="uploadpeople != null" >
+        uploadPeople,
+      </if>
+      <if test="auditingpeople != null" >
+        AuditingPeople,
+      </if>
+      <if test="samplenum != null" >
+        sampleNum,
+      </if>
+      <if test="customerunit != null" >
+        CustomerUnit,
+      </if>
+      <if test="expirationtips != null" >
+        ExpirationTips,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="uploadpeople != null" >
+        #{uploadpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="auditingpeople != null" >
+        #{auditingpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="samplenum != null" >
+        #{samplenum,jdbcType=VARCHAR},
+      </if>
+      <if test="customerunit != null" >
+        #{customerunit,jdbcType=VARCHAR},
+      </if>
+      <if test="expirationtips != null" >
+        #{expirationtips,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunsmart.nosae.entity.Projectadmin" >
+    update projectadmin
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="uploadpeople != null" >
+        uploadPeople = #{uploadpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="auditingpeople != null" >
+        AuditingPeople = #{auditingpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="samplenum != null" >
+        sampleNum = #{samplenum,jdbcType=VARCHAR},
+      </if>
+      <if test="customerunit != null" >
+        CustomerUnit = #{customerunit,jdbcType=VARCHAR},
+      </if>
+      <if test="expirationtips != null" >
+        ExpirationTips = #{expirationtips,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunsmart.nosae.entity.Projectadmin" >
+    update projectadmin
+    set name = #{name,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      uploadPeople = #{uploadpeople,jdbcType=VARCHAR},
+      AuditingPeople = #{auditingpeople,jdbcType=VARCHAR},
+      sampleNum = #{samplenum,jdbcType=VARCHAR},
+      CustomerUnit = #{customerunit,jdbcType=VARCHAR},
+      ExpirationTips = #{expirationtips,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

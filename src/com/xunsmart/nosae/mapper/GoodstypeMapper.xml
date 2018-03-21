@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunsmart.nosae.mapper.GoodstypeMapper" >
+  <resultMap id="GoodstypeResultMap" type="com.xunsmart.nosae.entity.Goodstype" >
+    <id column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="type_path" property="typePath" jdbcType="VARCHAR" />
+    <result column="type_Pid" property="typePid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    type_id, type_name, type_path, type_Pid
+  </sql>
+  <!-- 根据id查找 -->
+  <select id="findGoodstypeById" resultMap="GoodstypeResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goodstype
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </select>
+   <!-- 查找所有 -->
+  <select id="findAllGoodstype" resultMap="GoodstypeResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goodstype
+  </select>
+  <!-- 根据id删除购物车 -->
+  <delete id="delGoodstypeById" parameterType="java.lang.Integer" >
+    delete from goodstype
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </delete>
+ <!-- 增加 -->
+  <insert id="addGoodstype" parameterType="com.xunsmart.nosae.entity.Goodstype" >
+    insert into goodstype (type_id, type_name, type_path, 
+      type_Pid)
+    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{typePath,jdbcType=VARCHAR}, 
+      #{typePid,jdbcType=INTEGER})
+  </insert>
+  <!-- 有条件增加 -->
+  <insert id="addGoodstypeBySelective" parameterType="com.xunsmart.nosae.entity.Goodstype" >
+    insert into goodstype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="typeName != null" >
+        type_name,
+      </if>
+      <if test="typePath != null" >
+        type_path,
+      </if>
+      <if test="typePid != null" >
+        type_Pid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null" >
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="typePath != null" >
+        #{typePath,jdbcType=VARCHAR},
+      </if>
+      <if test="typePid != null" >
+        #{typePid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <!-- 有条件更新 -->
+  <update id="updateBySelective" parameterType="com.xunsmart.nosae.entity.Goodstype" >
+    update goodstype
+    <set >
+      <if test="typeName != null" >
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="typePath != null" >
+        type_path = #{typePath,jdbcType=VARCHAR},
+      </if>
+      <if test="typePid != null" >
+        type_Pid = #{typePid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+<!-- 更新 -->
+  <update id="updateById" parameterType="com.xunsmart.nosae.entity.Goodstype" >
+    update goodstype
+    set type_name = #{typeName,jdbcType=VARCHAR},
+      type_path = #{typePath,jdbcType=VARCHAR},
+      type_Pid = #{typePid,jdbcType=INTEGER}
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+</mapper>
