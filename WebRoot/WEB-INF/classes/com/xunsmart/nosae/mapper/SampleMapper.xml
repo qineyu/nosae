@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunsmart.nosae.mapper.SampleMapper" >
+  <resultMap id="SampleResultMap" type="com.xunsmart.nosae.entity.Sample" >
+    <id column="sample_id" property="sampleId" jdbcType="VARCHAR" />
+    <result column="sample_name" property="sampleName" jdbcType="VARCHAR" />
+    <result column="sample_user" property="sampleUser" jdbcType="INTEGER" />
+    <result column="sample_order" property="sampleOrder" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sample_id, sample_name, sample_user, sample_order
+  </sql>
+  <select id="findSampleById" resultMap="SampleResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sample
+    where sample_id = #{sampleId,jdbcType=VARCHAR}
+  </select>
+  <select id="findAllSample" resultMap="SampleResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sample
+  </select>
+  
+  <delete id="delSampleById" parameterType="java.lang.String" >
+    delete from sample
+    where sample_id = #{sampleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="addSample" parameterType="com.xunsmart.nosae.entity.Sample" >
+    insert into sample (sample_id, sample_name, sample_user, 
+      sample_order)
+    values (#{sampleId,jdbcType=VARCHAR}, #{sampleName,jdbcType=VARCHAR}, #{sampleUser,jdbcType=INTEGER}, 
+      #{sampleOrder,jdbcType=VARCHAR})
+  </insert>
+  <insert id="addSampleBySelective" parameterType="com.xunsmart.nosae.entity.Sample" >
+    insert into sample
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sampleId != null" >
+        sample_id,
+      </if>
+      <if test="sampleName != null" >
+        sample_name,
+      </if>
+      <if test="sampleUser != null" >
+        sample_user,
+      </if>
+      <if test="sampleOrder != null" >
+        sample_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sampleId != null" >
+        #{sampleId,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleName != null" >
+        #{sampleName,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleUser != null" >
+        #{sampleUser,jdbcType=INTEGER},
+      </if>
+      <if test="sampleOrder != null" >
+        #{sampleOrder,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateBySelective" parameterType="com.xunsmart.nosae.entity.Sample" >
+    update sample
+    <set >
+      <if test="sampleName != null" >
+        sample_name = #{sampleName,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleUser != null" >
+        sample_user = #{sampleUser,jdbcType=INTEGER},
+      </if>
+      <if test="sampleOrder != null" >
+        sample_order = #{sampleOrder,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sample_id = #{sampleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateById" parameterType="com.xunsmart.nosae.entity.Sample" >
+    update sample
+    set sample_name = #{sampleName,jdbcType=VARCHAR},
+      sample_user = #{sampleUser,jdbcType=INTEGER},
+      sample_order = #{sampleOrder,jdbcType=VARCHAR}
+    where sample_id = #{sampleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

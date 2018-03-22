@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunsmart.nosae.mapper.MyfileMapper" >
+  <resultMap id="BaseResultMap" type="com.xunsmart.nosae.entity.Myfile" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="CHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="islock" property="islock" jdbcType="INTEGER" />
+    <result column="isshare" property="isshare" jdbcType="INTEGER" />
+    <result column="sharedownload" property="sharedownload" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="shareurl" property="shareurl" jdbcType="VARCHAR" />
+    <result column="md5" property="md5" jdbcType="CHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.xunsmart.nosae.entity.Myfile" extends="BaseResultMap" >
+    <result column="size" property="size" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, parent_id, name, type, path, createdate, password, islock, isshare, sharedownload, 
+    location, shareurl, md5, description
+  </sql>
+  <sql id="Blob_Column_List" >
+    size
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from myfile
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from myfile
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xunsmart.nosae.entity.Myfile" >
+    insert into myfile (id, parent_id, name, 
+      type, path, createdate, password, 
+      islock, isshare, sharedownload, 
+      location, shareurl, md5, 
+      description, size)
+    values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=CHAR}, #{path,jdbcType=VARCHAR}, #{createdate,jdbcType=CHAR}, #{password,jdbcType=VARCHAR}, 
+      #{islock,jdbcType=INTEGER}, #{isshare,jdbcType=INTEGER}, #{sharedownload,jdbcType=INTEGER}, 
+      #{location,jdbcType=VARCHAR}, #{shareurl,jdbcType=VARCHAR}, #{md5,jdbcType=CHAR}, 
+      #{description,jdbcType=VARCHAR}, #{size,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunsmart.nosae.entity.Myfile" >
+    insert into myfile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="islock != null" >
+        islock,
+      </if>
+      <if test="isshare != null" >
+        isshare,
+      </if>
+      <if test="sharedownload != null" >
+        sharedownload,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="shareurl != null" >
+        shareurl,
+      </if>
+      <if test="md5 != null" >
+        md5,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=CHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="islock != null" >
+        #{islock,jdbcType=INTEGER},
+      </if>
+      <if test="isshare != null" >
+        #{isshare,jdbcType=INTEGER},
+      </if>
+      <if test="sharedownload != null" >
+        #{sharedownload,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="shareurl != null" >
+        #{shareurl,jdbcType=VARCHAR},
+      </if>
+      <if test="md5 != null" >
+        #{md5,jdbcType=CHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunsmart.nosae.entity.Myfile" >
+    update myfile
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=CHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="islock != null" >
+        islock = #{islock,jdbcType=INTEGER},
+      </if>
+      <if test="isshare != null" >
+        isshare = #{isshare,jdbcType=INTEGER},
+      </if>
+      <if test="sharedownload != null" >
+        sharedownload = #{sharedownload,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="shareurl != null" >
+        shareurl = #{shareurl,jdbcType=VARCHAR},
+      </if>
+      <if test="md5 != null" >
+        md5 = #{md5,jdbcType=CHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xunsmart.nosae.entity.Myfile" >
+    update myfile
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      path = #{path,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=CHAR},
+      password = #{password,jdbcType=VARCHAR},
+      islock = #{islock,jdbcType=INTEGER},
+      isshare = #{isshare,jdbcType=INTEGER},
+      sharedownload = #{sharedownload,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR},
+      shareurl = #{shareurl,jdbcType=VARCHAR},
+      md5 = #{md5,jdbcType=CHAR},
+      description = #{description,jdbcType=VARCHAR},
+      size = #{size,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunsmart.nosae.entity.Myfile" >
+    update myfile
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      path = #{path,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=CHAR},
+      password = #{password,jdbcType=VARCHAR},
+      islock = #{islock,jdbcType=INTEGER},
+      isshare = #{isshare,jdbcType=INTEGER},
+      sharedownload = #{sharedownload,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR},
+      shareurl = #{shareurl,jdbcType=VARCHAR},
+      md5 = #{md5,jdbcType=CHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunsmart.nosae.mapper.AddressMapper" >
+  <resultMap id="AddressResultMap" type="com.xunsmart.nosae.entity.Address" >
+    <id column="address_Id" property="addressId" jdbcType="INTEGER" />
+    <result column="address_name" property="addressName" jdbcType="VARCHAR" />
+    <result column="address_Pid" property="addressPid" jdbcType="INTEGER" />
+    <result column="address_level" property="addressLevel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    address_Id, address_name, address_Pid, address_level
+  </sql>
+  <!-- 根据id查找 -->
+  <select id="findAddressById" resultMap="AddressResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from address
+    where address_Id = #{addressId,jdbcType=INTEGER}
+  </select>
+   <!-- 查询所有 -->
+  <select id="findAllAddress" resultMap="AddressResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from address
+  </select>
+  <!-- 删除 -->
+  <delete id="delAddressById" parameterType="java.lang.Integer" >
+    delete from address
+    where address_Id = #{addressId,jdbcType=INTEGER}
+  </delete>
+  <!-- 增加 -->
+  <insert id="addAddress" parameterType="com.xunsmart.nosae.entity.Address" >
+    insert into address (address_Id, address_name, address_Pid, 
+      address_level)
+    values (#{addressId,jdbcType=INTEGER}, #{addressName,jdbcType=VARCHAR}, #{addressPid,jdbcType=INTEGER}, 
+      #{addressLevel,jdbcType=INTEGER})
+  </insert>
+  <!-- 有条件增加 -->
+  <insert id="addAddressBySelective" parameterType="com.xunsmart.nosae.entity.Address" >
+    insert into address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="addressId != null" >
+        address_Id,
+      </if>
+      <if test="addressName != null" >
+        address_name,
+      </if>
+      <if test="addressPid != null" >
+        address_Pid,
+      </if>
+      <if test="addressLevel != null" >
+        address_level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="addressName != null" >
+        #{addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPid != null" >
+        #{addressPid,jdbcType=INTEGER},
+      </if>
+      <if test="addressLevel != null" >
+        #{addressLevel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <!-- 有条件更新 -->
+  <update id="updateBySelective" parameterType="com.xunsmart.nosae.entity.Address" >
+    update address
+    <set >
+      <if test="addressName != null" >
+        address_name = #{addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPid != null" >
+        address_Pid = #{addressPid,jdbcType=INTEGER},
+      </if>
+      <if test="addressLevel != null" >
+        address_level = #{addressLevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where address_Id = #{addressId,jdbcType=INTEGER}
+  </update>
+  <!-- 更新 -->
+  <update id="updateById" parameterType="com.xunsmart.nosae.entity.Address" >
+    update address
+    set address_name = #{addressName,jdbcType=VARCHAR},
+      address_Pid = #{addressPid,jdbcType=INTEGER},
+      address_level = #{addressLevel,jdbcType=INTEGER}
+    where address_Id = #{addressId,jdbcType=INTEGER}
+  </update>
+</mapper>

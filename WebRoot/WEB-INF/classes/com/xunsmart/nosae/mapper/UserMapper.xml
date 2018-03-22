@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunsmart.nosae.mapper.UserMapper" >
+  <resultMap id="UserResultMap" type="com.xunsmart.nosae.entity.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_pass" property="userPass" jdbcType="VARCHAR" />
+    <result column="user_nick_name" property="userNickName" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="user_sex" property="userSex" jdbcType="VARCHAR" />
+    <result column="uesr_email" property="uesrEmail" jdbcType="VARCHAR" />
+    <result column="user_headimg" property="userHeadimg" jdbcType="VARCHAR" />
+     <result column="user_desc" property="userDesc" jdbcType="VARCHAR" />
+    <result column="wechat_open_Id" property="wechatOpenId" jdbcType="VARCHAR" />
+    <result column="wechat_Name" property="wechatName" jdbcType="VARCHAR" />
+    <result column="wechat_headimg" property="wechatHeadimg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_pass, user_nick_name, user_phone, user_sex, uesr_email, 
+    user_headimg, wechat_open_Id, wechat_Name, wechat_headimg,user_desc
+  </sql>
+  <select id="findUserById" resultMap="UserResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="findAllUser" resultMap="UserResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+   <select id="findUserByPhone" resultMap="UserResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_Phone = #{userPhone,jdbcType=VARCHAR}
+  </select>
+  <delete id="delUserById" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="addUser" parameterType="com.xunsmart.nosae.entity.User" >
+    insert into user (user_id, user_name, user_pass,
+      user_nick_name, user_phone, user_sex,
+      uesr_email, user_headimg, wechat_open_Id,
+      wechat_Name, wechat_headimg)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPass,jdbcType=VARCHAR}, 
+      #{userNickName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, 
+      #{uesrEmail,jdbcType=VARCHAR}, #{userHeadimg,jdbcType=VARCHAR}, #{wechatOpenId,jdbcType=VARCHAR}, 
+      #{wechatName,jdbcType=VARCHAR}, #{wechatHeadimg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="addUserBySelective" parameterType="com.xunsmart.nosae.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPass != null" >
+        user_pass,
+      </if>
+      <if test="userNickName != null" >
+        user_nick_name,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="userSex != null" >
+        user_sex,
+      </if>
+      <if test="uesrEmail != null" >
+        uesr_email,
+      </if>
+      <if test="userHeadimg != null" >
+        user_headimg,
+      </if>
+      <if test="wechatOpenId != null" >
+        wechat_open_Id,
+      </if>
+      <if test="wechatName != null" >
+        wechat_Name,
+      </if>
+      <if test="wechatHeadimg != null" >
+        wechat_headimg,
+      </if>
+       <if test="userDesc != null" >
+        user_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPass != null" >
+        #{userPass,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null" >
+        #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="uesrEmail != null" >
+        #{uesrEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userHeadimg != null" >
+        #{userHeadimg,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatOpenId != null" >
+        #{wechatOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatName != null" >
+        #{wechatName,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatHeadimg != null" >
+        #{wechatHeadimg,jdbcType=VARCHAR},
+      </if>
+        <if test="userDesc != null" >
+         #{userDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateBySelective" parameterType="com.xunsmart.nosae.entity.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPass != null" >
+        user_pass = #{userPass,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null" >
+        user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        user_sex = #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="uesrEmail != null" >
+        uesr_email = #{uesrEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userHeadimg != null" >
+        user_headimg = #{userHeadimg,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatOpenId != null" >
+        wechat_open_Id = #{wechatOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatName != null" >
+        wechat_Name = #{wechatName,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatHeadimg != null" >
+        wechat_headimg = #{wechatHeadimg,jdbcType=VARCHAR},
+      </if>
+      <if test="userDesc != null" >
+        user_Desc= #{userDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateById" parameterType="com.xunsmart.nosae.entity.User" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_pass = #{userPass,jdbcType=VARCHAR},
+      user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=VARCHAR},
+      uesr_email = #{uesrEmail,jdbcType=VARCHAR},
+      user_headimg = #{userHeadimg,jdbcType=VARCHAR},
+      wechat_open_Id = #{wechatOpenId,jdbcType=VARCHAR},
+      wechat_Name = #{wechatName,jdbcType=VARCHAR},
+      wechat_headimg = #{wechatHeadimg,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+</mapper>
