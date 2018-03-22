@@ -33,12 +33,10 @@ public class UserController {
 			}	
 		}
 		return "error";
-		
 	}
 	
 	@RequestMapping("userRegister")
 	public String userRegister(User user){
-		
 		int res=uService.adduserBySelective(user);
 		if(res==1)
 		return "login";

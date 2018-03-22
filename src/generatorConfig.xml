@@ -42,7 +42,7 @@
 		<javaClientGenerator targetPackage="com.xunsmart.nosae.mapper"
 			targetProject="nosae" type="XMLMAPPER" />
 
-<table schema="nosae" tableName="order"
+<table schema="nosae" tableName="u_adress"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
@@ -150,11 +150,7 @@
 			selectByExampleQueryId="false">
 		</table>
 			 
-		<table schema="nosae" tableName="information"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-		</table>-->
+		-->
 		
 	</context>
 </generatorConfiguration>
