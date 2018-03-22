@@ -23,7 +23,7 @@ public class UserController {
 	@RequestMapping("userlogin")
 	public String userlogin(HttpSession session,User user){
 		User muser= uService.findUserByPhone(user.getUserName());
-		if (EmptyUtils.isEmpty(user)) {
+		if (EmptyUtils.isEmpty(muser)) {
 			return "error";
 		}
 		if (EmptyUtils.isNotEmpty(muser.getUserName())||EmptyUtils.isNotEmpty(muser.getUserPhone())) {
@@ -65,4 +65,23 @@ public class UserController {
 		}
 	}
 	
+	
+	@RequestMapping("changeUserMsg")
+	public String changeUserMsg(HttpSession session,User newUser){
+		User user = (User) session.getAttribute(UserTAG);
+		if (EmptyUtils.isEmpty(user)) {
+			System.out.println("用户身份过期,需重新登录");
+			return "login";
+		}
+		user.setUserNickName(newUser.getUserNickName());
+		user.setUserSex(newUser.getUserSex());
+		user.setUesrEmail(newUser.getUesrEmail());
+		user.setUserDesc(newUser.getUserDesc());
+		int re = uService.updateBySelective(user);
+		if (re==1) {
+			return "user";	
+		}else{
+			return "error";	
+		}
+	}
 }

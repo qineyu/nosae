@@ -124,4 +124,16 @@ public class User implements Serializable {
 	public void setUserDesc(String userDesc) {
 		this.userDesc = userDesc;
 	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName
+				+ ", userPass=" + userPass + ", userNickName=" + userNickName
+				+ ", userPhone=" + userPhone + ", userDesc=" + userDesc
+				+ ", userSex=" + userSex + ", uesrEmail=" + uesrEmail
+				+ ", userHeadimg=" + userHeadimg + ", wechatOpenId="
+				+ wechatOpenId + ", wechatName=" + wechatName
+				+ ", wechatHeadimg=" + wechatHeadimg + "]";
+	}
+	
 }

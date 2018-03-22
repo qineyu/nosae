@@ -89,6 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </ul>
             </div>
             <div class="user-dlc">
+            <form action="${pageContext.request.contextPath}/userController/changeUserMsg" method="post">
               <dl class="clearfix">
                 <div class="cl lh80">头像：</div>
                 <div class="cr">
@@ -102,7 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <dl class="clearfix">
                 <div class="cl">昵称：</div>
                 <div class="cr">
-                  <input type="text" class="ipt-txt" placeholder="输入个人昵称">
+                  <input type="text" name = "userNickName" class="ipt-txt" placeholder="输入个人昵称">
                 </div>
               </dl>
               <dl class="clearfix">
@@ -114,12 +115,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="cr">
                   <div class="xb-c">
                     <div class="ui-check2">
-                      <input type="checkbox" checked="checked">
+                      <input type="checkbox" name="userSex" value="男" checked="checked">
                       <span class="ico ico-hov"></span>
                     </div>
                     <span>&ensp;男&ensp;&ensp;&ensp;&ensp;&ensp;</span>
                     <div class="ui-check2">
-                      <input type="checkbox">
+                      <input type="checkbox" name="userSex" value="女">
                       <span class="ico"></span>
                     </div>
                     <span>&ensp;女</span>
@@ -129,13 +130,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <dl class="clearfix">
                 <div class="cl">邮箱：</div>
                 <div class="cr">
-                  <input type="text" class="ipt-txt" placeholder="输入个人常用邮箱">
+                  <input type="text" name="uesrEmail" class="ipt-txt" placeholder="输入个人常用邮箱">
                 </div>
               </dl>
               <dl class="clearfix">
                 <div class="cl">个人介绍：</div>
                 <div class="cr">
-                  <textarea placeholder="输入个人介绍" class="ipt-textarea"></textarea>
+                  <textarea placeholder="输入个人介绍" name="userDesc" class="ipt-textarea"></textarea>
                 </div>
               </dl>
               <dl class="clearfix">
@@ -146,8 +147,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   </center>
                 </div>
               </dl>
+               </form>
             </div>
+           
           </div>
+          
           <div class="bk80"></div>
         </div>
       </div>
