@@ -3,7 +3,7 @@ package com.xunsmart.nosae.entity;
 import java.io.Serializable;
 
 public class Order implements Serializable {
-    private String orderId;
+    private Integer orderId;
 
 	private String orderNumber;
 
@@ -17,13 +17,7 @@ public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public String getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
-	}
+	
 
 	public String getOrderNumber() {
 		return orderNumber;
@@ -63,6 +57,14 @@ public class Order implements Serializable {
 
 	public void setOrderState(String orderState) {
 		this.orderState = orderState;
+	}
+
+	public Integer getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 
 	
