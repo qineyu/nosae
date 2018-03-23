@@ -1,8 +1,5 @@
 package com.xunsmart.nosae.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,7 @@ public class UserController {
 	@Autowired
 	private UserService uService;
 	private String UserTAG = "user";
+	
 	@RequestMapping("userlogin")
 	public String userlogin(HttpSession session,User user){
 		User muser= uService.findUserByPhone(user.getUserName());
@@ -43,6 +41,7 @@ public class UserController {
 		else
 		return "error";
 	}
+	
 	@RequestMapping("changePassWord")
 	public String changePassWord(HttpSession session,String oldpwd,String newpwd){
 		User user = (User) session.getAttribute(UserTAG);
